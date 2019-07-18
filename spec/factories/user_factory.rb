@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
-    sequence(:name) { |n| "test #{ n }" }
-    sequence(:email) { |n| "test#{ n }@test.com" }
+    name FFaker::Name.unique.name
+    email FFaker::Internet.email
     password '123456'
     password_confirmation '123456'
   end

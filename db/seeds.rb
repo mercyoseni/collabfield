@@ -3,8 +3,8 @@ require 'ffaker'
 def seed_users
   10.times do |num|
     User.create(
-      name: "Test #{ num }",
-      email: "test#{ num }@test.com",
+      name: "Test #{ num + 1 }",
+      email: "test#{ num + 1 }@test.com",
       password: '123456',
       password_confirmation: '123456'
     )

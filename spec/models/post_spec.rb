@@ -32,9 +32,12 @@ RSpec.describe Post, type: :model do
     end
 
     it 'by_branch scope gets posts by particular branch' do
-      category = create(:category)
+      category = create(:category, branch: 'hobby')
+      team_category = create(:category, branch: 'team')
+
       create(:post, category: category)
-      create_list(:post, 2)
+      create_list(:post, 2, category: team_category)
+
       posts = Post.by_branch(category.branch)
 
       expect(posts.count).to eq(1)

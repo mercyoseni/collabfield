@@ -60,8 +60,8 @@ def seed_posts
   categories.each do |category|
     5.times do
       Post.create(
-        title: FFaker::Name.unique.name,
-        content: FFaker::Lorem.paragraph,
+        title: FFaker::Book.title,
+        content: FFaker::Lorem.paragraphs(5).join(' '),
         user_id: User.pluck(:id).sample,
         category_id: category.id
       )

@@ -20,6 +20,7 @@ gem 'bootstrap_form'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
+  gem 'ffaker'
 end
 
 group :development do

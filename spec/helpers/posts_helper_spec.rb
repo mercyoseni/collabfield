@@ -70,4 +70,30 @@ RSpec.describe PostsHelper, type: :helper do
       end
     end
   end
+
+  describe '#post_format_partial_path' do
+    context 'when current path is the root path' do
+      before do
+        allow(helper).to receive(:current_page?).and_return(true)
+      end
+
+      it "returns a home_page partial's path" do
+        expect(helper.post_format_partial_path).to eq(
+          'posts/post/home_page'
+        )
+      end
+    end
+
+    context 'when current path is NOT the root path' do
+      before do
+        allow(helper).to receive(:current_page?).and_return(false)
+      end
+
+      it "returns a branch_page partial's path" do
+        expect(helper.post_format_partial_path).to eq(
+          'posts/post/branch_page'
+        )
+      end
+    end
+  end
 end

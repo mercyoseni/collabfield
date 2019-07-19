@@ -1,6 +1,7 @@
 ## COLLABFIELD
 
 ### A platform where you could search and meet like-minded people.
+##### Check out [Collabfield on heroku](https://collabfield-test.herokuapp.com/)
 
 #### App Main functionalities:
 - Authentication (with Devise)

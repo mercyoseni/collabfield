@@ -1,5 +1,4 @@
 require 'rails_helper'
-require './app/services/posts_for_branch_service.rb'
 
 describe PostsForBranchService do
   describe '#run' do

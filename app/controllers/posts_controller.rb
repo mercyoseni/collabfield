@@ -29,7 +29,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post)
     else
-      redirect_to root_path
+      render 'new'
     end
   end
 

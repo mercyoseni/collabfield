@@ -122,4 +122,68 @@ RSpec.describe PostsHelper, type: :helper do
       end
     end
   end
+
+  describe '#contact_user_partial_path' do
+    context 'when user is signed in' do
+      before do
+        allow(helper).to receive(:user_signed_in?).and_return(true)
+        @current_user = create(:user, id: 1)
+        allow(helper).to receive(:current_user).and_return(@current_user)
+      end
+
+      context "when the current user is the post's creator" do
+        it "returns an empty partial's path" do
+          assign(:post, create(:post, user_id: @current_user.id))
+
+          expect(helper.contact_user_partial_path).to eq(
+            'shared/empty_partial'
+          )
+        end
+      end
+
+      context "when the current user is NOT the post's creator" do
+        it "returns a contact_user partial's path" do
+          assign(:post, create(:post, user_id: create(:user, id: 2).id))
+
+          expect(helper.contact_user_partial_path).to eq(
+            'posts/show/contact_user'
+          )
+        end
+      end
+    end
+
+    context 'when user is NOT signed in' do
+      before do
+        allow(helper).to receive(:user_signed_in?).and_return(false)
+      end
+
+      it "returns login_required partial's path" do
+        expect(helper.contact_user_partial_path).to eq(
+          'posts/show/login_required'
+        )
+      end
+    end
+  end
+
+  describe '#leave_message_partial_path' do
+    context 'when message has been sent' do
+      it "returns an already_in_touch partial's path" do
+        assign('message_has_been_sent', true)
+
+        expect(helper.leave_message_partial_path).to eq(
+          'posts/show/contact_user/already_in_touch'
+        )
+      end
+    end
+
+    context 'when message has NOT been sent' do
+      it "returns an message_form partial's path" do
+        assign('message_has_been_sent', false)
+
+        expect(helper.leave_message_partial_path).to eq(
+          'posts/show/contact_user/message_form'
+        )
+      end
+    end
+  end
 end
